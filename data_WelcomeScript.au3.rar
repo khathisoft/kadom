@@ -1,0 +1,51 @@
+; Kadom
+; WelcomeScript
+
+
+#NoTrayIcon
+#RequireAdmin
+
+
+
+; Run at startup
+
+;~ Startup('D:\ProgramFiles\UniKey\UniKeyNT.exe')
+
+;~ Startup(StringTrimRight(@ScriptDir,4)&'app\procexp64.exe')
+
+
+
+
+
+Exit ; Script will end here
+
+
+
+
+
+
+
+
+#Region NOT EDIT HERE
+
+
+
+Func Startup($programDir)
+   $programName=''
+   $len=StringLen($programDir)
+   For $i=1 To $len
+	  If StringMid($programDir,$len-$i+1,1)='\' Then
+		 $programName=StringRight($programDir,$i-1)
+		 ExitLoop
+	  EndIf
+   Next
+   If $programName='' Then Return False
+   ;ConsoleWrite($programName&@CRLF)
+   If ProcessExists($programName)=0 Then
+	  If FileExists($programDir)=1 Then Run($programDir)
+   EndIf
+EndFunc
+
+
+
+#EndRegion NOT EDIT HERE
